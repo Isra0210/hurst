@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "130165126836",
+    "project_id": "hurst-d954d",
+    "storage_bucket": "hurst-d954d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:130165126836:android:f23735e4a63760ca0e89e1",
+        "android_client_info": {
+          "package_name": "br.com.hurst"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "130165126836-0gc1cfaumpi8s5qh71uf0v7tblo86lrn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA3cHX2QjGzKu-5UjJxPW0DxoMw0s0q0lM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "130165126836-0gc1cfaumpi8s5qh71uf0v7tblo86lrn.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
