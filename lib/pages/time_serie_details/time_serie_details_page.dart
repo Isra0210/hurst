@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hurst/pages/components/base_card_component.dart';
 import 'package:hurst/pages/components/rich_text_component.dart';
+import 'package:hurst/pages/time_serie_details/time_serie_details_component.dart';
 import 'package:hurst/repository/models/serie_view_model.dart';
 
 import '../../repository/models/time_serie_view_model.dart';
@@ -12,6 +13,8 @@ class TimeSerieDetailsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final GlobalKey<ScaffoldState> scaffoldkey = GlobalKey<ScaffoldState>();
+
     TimeSerieViewModel timeSerie =
         ModalRoute.of(context)!.settings.arguments as TimeSerieViewModel;
 
@@ -44,6 +47,7 @@ class TimeSerieDetailsPage extends StatelessWidget {
     }).toList();
 
     return Scaffold(
+      key: scaffoldkey,
       backgroundColor: Theme.of(context).colorScheme.background,
       appBar: AppBar(
         elevation: 0,
@@ -59,110 +63,91 @@ class TimeSerieDetailsPage extends StatelessWidget {
           child: Column(
             children: [
               ...series.map(
-                (serie) => BaseCardComponent(
-                  height: serie.adjustedClose == null
-                      ? MediaQuery.of(context).size.height * 0.16
-                      : MediaQuery.of(context).size.height * 0.2,
-                  margin: const EdgeInsets.symmetric(
-                    horizontal: 16,
-                    vertical: 8,
-                  ),
-                  color: Theme.of(context).colorScheme.background,
-                  child: Column(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(bottom: 8.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              serie.id.substring(0, 10),
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodyMedium!
-                                  .copyWith(fontWeight: FontWeight.bold),
-                            ),
-                            serie.adjustedClose == null
-                                ? Text(
-                                    serie.id.substring(11, 16),
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .bodyMedium!
-                                        .copyWith(fontWeight: FontWeight.bold),
-                                  )
-                                : const SizedBox(),
-                          ],
-                        ),
+                (serie) => GestureDetector(
+                  onTap: () {
+                    showModalBottomSheet(
+                      context: context,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10.0),
                       ),
-                      Expanded(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                RichTectComponent(
-                                  highlightedLabel: 'Aberto: ',
-                                  label: serie.open,
-                                ),
-                                RichTectComponent(
-                                  highlightedLabel: 'Alta: ',
-                                  label: serie.high,
-                                ),
-                              ],
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                RichTectComponent(
-                                  highlightedLabel: 'Baixa: ',
-                                  label: serie.low,
-                                ),
-                                RichTectComponent(
-                                  highlightedLabel: 'Fechada: ',
-                                  label: serie.close,
-                                ),
-                              ],
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                RichTectComponent(
-                                  highlightedLabel: 'Volume: ',
-                                  label: serie.volume,
-                                ),
-                                Visibility(
-                                  visible: serie.adjustedClose != null,
-                                  child: RichTectComponent(
-                                    highlightedLabel: 'Ajuste fechado: ',
-                                    label: serie.adjustedClose ?? '',
-                                  ),
-                                ),
-                              ],
-                            ),
-                            Visibility(
-                              visible: serie.splitCoefficient != null &&
-                                  serie.dividendAmount != null,
-                              child: Row(
+                      builder: (context) {
+                        return TimeSerieDetailsComponent(serie: serie);
+                      },
+                    );
+                  },
+                  child: BaseCardComponent(
+                    borderRadius: BorderRadius.circular(8),
+                    height: MediaQuery.of(context).size.height * 0.13,
+                    margin: const EdgeInsets.symmetric(
+                      horizontal: 16,
+                      vertical: 8,
+                    ),
+                    color: Theme.of(context).colorScheme.background,
+                    child: Column(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(bottom: 10.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                serie.id.substring(0, 10),
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodyMedium!
+                                    .copyWith(fontWeight: FontWeight.bold),
+                              ),
+                              serie.adjustedClose == null
+                                  ? Text(
+                                      serie.id.substring(11, 16),
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .bodyMedium!
+                                          .copyWith(
+                                              fontWeight: FontWeight.bold),
+                                    )
+                                  : const SizedBox(),
+                            ],
+                          ),
+                        ),
+                        Expanded(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   RichTectComponent(
-                                    highlightedLabel: 'Valor do dividendo: ',
-                                    label: serie.dividendAmount ?? '',
+                                    highlightedLabel: 'Aberto: ',
+                                    label: serie.open,
                                   ),
                                   RichTectComponent(
-                                    highlightedLabel:
-                                        'Coeficiente de divisão: ',
-                                    label: serie.splitCoefficient ?? '',
+                                    highlightedLabel: 'Alta: ',
+                                    label: serie.high,
                                   ),
                                 ],
                               ),
-                            )
-                          ],
-                        ),
-                      )
-                    ],
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  RichTectComponent(
+                                    highlightedLabel: 'Baixa: ',
+                                    label: serie.low,
+                                  ),
+                                  RichTectComponent(
+                                    highlightedLabel: 'Fechada: ',
+                                    label: serie.close,
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
                   ),
                 ),
               ),
