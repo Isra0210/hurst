@@ -55,7 +55,6 @@ class OrderComponent extends StatelessWidget {
                       context.read<SortListCubit>().addSortList(
                         {"by": "high", "as": state.sortList?["as"]},
                       );
-                      print(state.sortList);
                     },
                   ),
                   radioComponent(
@@ -66,7 +65,6 @@ class OrderComponent extends StatelessWidget {
                       context.read<SortListCubit>().addSortList(
                         {"by": "low", "as": state.sortList?["as"]},
                       );
-                      print(state.sortList);
                     },
                   ),
                 ],
@@ -89,7 +87,6 @@ class OrderComponent extends StatelessWidget {
                       context.read<SortListCubit>().addSortList(
                         {"by": state.sortList?["by"], "as": "asc"},
                       );
-                      print(state.sortList);
                     },
                   ),
                   radioComponent(
@@ -100,7 +97,6 @@ class OrderComponent extends StatelessWidget {
                       context.read<SortListCubit>().addSortList(
                         {"by": state.sortList?["by"], "as": "desc"},
                       );
-                      print(state.sortList);
                     },
                   ),
                 ],
