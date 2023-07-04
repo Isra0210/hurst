@@ -95,25 +95,25 @@ class TimeSerieDetailsPage extends StatelessWidget {
       body: Padding(
         padding: const EdgeInsets.only(top: 16.0),
         child: FutureBuilder(
-            future: initializationListDate(context),
-            builder: (context, AsyncSnapshot<List<SerieViewModel>?> snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return const Center(
-                  child: CircularProgressIndicator(),
-                );
-              }
+          future: initializationListDate(context),
+          builder: (context, AsyncSnapshot<List<SerieViewModel>?> snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            }
 
-              if (snapshot.data == null || snapshot.hasError) {
-                return Center(
-                  child: Text(
-                    R.string.somethingWentWrong,
-                    style: Theme.of(context).textTheme.bodyLarge,
-                  ),
-                );
-              }
+            if (snapshot.data == null || snapshot.hasError) {
+              return Center(
+                child: Text(
+                  R.string.somethingWentWrong,
+                  style: Theme.of(context).textTheme.bodyLarge,
+                ),
+              );
+            }
 
-              return BlocBuilder<SortListCubit, SortListState>(
-                  builder: (context, sort) {
+            return BlocBuilder<SortListCubit, SortListState>(
+              builder: (context, sort) {
                 List<SerieViewModel> series = sortList(
                   series: snapshot.data ?? [],
                   type: sort.sortList?["as"] ?? SortListByEnum.asc.name,
@@ -162,11 +162,13 @@ class TimeSerieDetailsPage extends StatelessWidget {
                           onTap: () {
                             showModalBottomSheet(
                               context: context,
+                              isScrollControlled: true,
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(10.0),
                               ),
-                              builder: (context) =>
-                                  TimeSerieDetailsComponent(serie: serie),
+                              builder: (context) => SingleChildScrollView(
+                                child: TimeSerieDetailsComponent(serie: serie),
+                              ),
                             );
                           },
                           child: BaseCardComponent(
@@ -219,11 +221,13 @@ class TimeSerieDetailsPage extends StatelessWidget {
                                             MainAxisAlignment.spaceBetween,
                                         children: [
                                           RichTectComponent(
-                                            highlightedLabel: '${R.string.open}: ',
+                                            highlightedLabel:
+                                                '${R.string.open}: ',
                                             label: serie.open,
                                           ),
                                           RichTectComponent(
-                                            highlightedLabel: '${R.string.high}: ',
+                                            highlightedLabel:
+                                                '${R.string.high}: ',
                                             label: serie.high,
                                           ),
                                         ],
@@ -233,11 +237,13 @@ class TimeSerieDetailsPage extends StatelessWidget {
                                             MainAxisAlignment.spaceBetween,
                                         children: [
                                           RichTectComponent(
-                                            highlightedLabel: '${R.string.low}: ',
+                                            highlightedLabel:
+                                                '${R.string.low}: ',
                                             label: serie.low,
                                           ),
                                           RichTectComponent(
-                                            highlightedLabel: '${R.string.closed}: ',
+                                            highlightedLabel:
+                                                '${R.string.closed}: ',
                                             label: serie.close,
                                           ),
                                         ],
@@ -253,8 +259,10 @@ class TimeSerieDetailsPage extends StatelessWidget {
                     ],
                   ),
                 );
-              });
-            }),
+              },
+            );
+          },
+        ),
       ),
     );
   }

@@ -47,8 +47,10 @@ class TimeSerieDetailsComponent extends StatelessWidget {
               ],
             ),
           ),
-          Expanded(
+          SizedBox(
+            height: MediaQuery.of(context).size.height * 0.4,
             child: Column(
+              mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
