@@ -4,8 +4,6 @@ import 'package:hurst/repository/models/time_serie_view_model.dart';
 class TimeSerieRepository {
   final Dio _dio = Dio(BaseOptions(
     contentType: 'application/json',
-    connectTimeout: const Duration(milliseconds: 5000),
-    receiveTimeout: const Duration(milliseconds: 3000),
   ));
 
   Future<TimeSerieViewModel?> getTimeSeries({
