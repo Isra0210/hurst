@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:hurst/pages/time_serie_details/components/close_bottom_sheet_component.dart';
 import 'package:hurst/repository/models/serie_view_model.dart';
 
-import '../components/rich_text_component.dart';
+import '../../components/rich_text_component.dart';
 
 class TimeSerieDetailsComponent extends StatelessWidget {
   const TimeSerieDetailsComponent({required this.serie, super.key});
@@ -41,17 +42,7 @@ class TimeSerieDetailsComponent extends StatelessWidget {
                         : const SizedBox(),
                   ],
                 ),
-                GestureDetector(
-                  onTap: () => Navigator.of(context).pop(),
-                  child: CircleAvatar(
-                    radius: 16,
-                    backgroundColor: Theme.of(context).colorScheme.shadow,
-                    child: Icon(
-                      Icons.clear,
-                      color: Theme.of(context).colorScheme.surface,
-                    ),
-                  ),
-                )
+                const CloseBottomSheetComponent(),
               ],
             ),
           ),

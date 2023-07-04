@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hurst/pages/components/time_serie_body_card_component.dart';
+import 'package:hurst/pages/home/cubit/favorite_time_serie/favorite_time_serie_cubit.dart';
+import 'package:hurst/pages/home/cubit/favorite_time_serie/favorite_time_serie_state.dart';
 
 class FavoritePage extends StatelessWidget {
   const FavoritePage({super.key});
@@ -16,6 +20,30 @@ class FavoritePage extends StatelessWidget {
           "Favoritos",
           style: Theme.of(context).textTheme.bodyLarge,
         ),
+      ),
+      body: BlocBuilder<FavoriteTimeSerieCubit, FavoriteTimeSerieState>(
+        builder: (context, state) {
+          if (state.timeSeriesList.isNotEmpty) {
+            return SingleChildScrollView(
+              child: Center(
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Column(
+                    children: [
+                      ...state.timeSeriesList.map(
+                        (timeSerie) => Padding(
+                          padding: const EdgeInsets.only(bottom: 20.0),
+                          child: TimeSerieBodyCardComponent(timeSerie: timeSerie!,),
+                        )
+                      )
+                    ],
+                  ),
+                ),
+              ),
+            );
+          }
+          return const Center(child: Text("Não há favoritos"));
+        },
       ),
     );
   }

@@ -7,6 +7,7 @@ import 'package:hurst/pages/home/cubit/filter_time_serie_by_index/change_index_c
 import 'package:hurst/pages/home/cubit/filter_time_serie_by_index/change_index_state.dart';
 import 'package:hurst/pages/home/cubit/time_serie/time_serie_cubit.dart';
 import 'package:hurst/pages/splash/splash_page.dart';
+import 'package:hurst/pages/time_serie_details/cubit/oreder_list/sort_list_cubit.dart';
 import 'package:hurst/pages/time_serie_details/time_serie_details_page.dart';
 import 'package:hurst/repository/api/time_serie_repository.dart';
 import 'package:hurst/theme/light/app_theme.dart';
@@ -39,6 +40,11 @@ class MyApp extends StatelessWidget {
             TimeSerieRepository(),
           ),
         ),
+        BlocProvider(
+          create: (context) => SortListCubit(
+            sort: {"by": "high", "as": "asc"},
+          ),
+        )
       ],
       child: MaterialApp(
         title: 'Hurst Test',

@@ -9,7 +9,7 @@ class SkeletonComponent extends StatelessWidget {
   Widget build(BuildContext context) {
     return BaseCardComponent(
       color: Theme.of(context).colorScheme.background,
-      width: MediaQuery.of(context).size.width * 0.8,
+      width: MediaQuery.of(context).size.width * 0.86,
       padding: 0,
       borderRadius: BorderRadius.circular(12),
       child: Column(
@@ -31,7 +31,7 @@ class SkeletonComponent extends StatelessWidget {
             margin: const EdgeInsets.only(top: 8),
             padding: const EdgeInsets.all(12),
             child: SizedBox(
-              height: MediaQuery.of(context).size.height * 0.32,
+              height: MediaQuery.of(context).size.height * 0.3,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [

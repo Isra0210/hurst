@@ -26,9 +26,12 @@ class AppTheme with HCTextTheme {
       ),
       scaffoldBackgroundColor: Colors.transparent,
       primaryColor: HCColors.primaryColorDefault,
+      pageTransitionsTheme: const PageTransitionsTheme(builders: {
+        TargetPlatform.android: CupertinoPageTransitionsBuilder(),
+      }),
     );
   }
-  
+
   ThemeData makeAppDarkTheme() {
     return ThemeData(
       textTheme: makeInputTextTheme(HCColors.bgColorDefault),
@@ -51,6 +54,9 @@ class AppTheme with HCTextTheme {
       ),
       scaffoldBackgroundColor: Colors.transparent,
       primaryColor: HCColors.primaryColorDefault,
+      pageTransitionsTheme: const PageTransitionsTheme(builders: {
+        TargetPlatform.android: CupertinoPageTransitionsBuilder(),
+      }),
     );
   }
 }

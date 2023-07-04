@@ -6,7 +6,7 @@ class FavoriteTimeSerieCubit extends Cubit<FavoriteTimeSerieState> {
   List<TimeSerieViewModel> favoriteList = [];
 
   FavoriteTimeSerieCubit({TimeSerieViewModel? timeSerie})
-      : super(FavoriteTimeSerieState([timeSerie])) {
+      : super(FavoriteTimeSerieState(timeSerie == null ? [] : [timeSerie])) {
     addFavoriteTimeSerie(timeSerie);
     removeFavoriteTimeSerie(timeSerie);
   }

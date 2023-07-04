@@ -6,7 +6,7 @@ import 'package:hurst/pages/home/cubit/filter_time_serie_by_index/change_index_s
 import 'package:hurst/pages/home/cubit/time_serie/time_serie_cubit.dart';
 import 'package:hurst/pages/home/cubit/time_serie/time_serie_state.dart';
 import 'package:hurst/pages/components/base_card_component.dart';
-import 'package:hurst/pages/home/components/time_serie_body_card_component.dart';
+import 'package:hurst/pages/components/time_serie_body_card_component.dart';
 import 'package:hurst/repository/models/time_serie_view_model.dart';
 
 import 'components/skeleton_component.dart';
@@ -19,14 +19,6 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final List<String> filterSeries = ["Série intermediária", "Série diária"];
-    final List<Map<String, dynamic>> routes = [
-      {"route": "/", "pageNAme": "Home", "icon": Icons.home},
-      {
-        "route": FavoritePage.route,
-        "pageNAme": "Favoritos",
-        "icon": Icons.favorite
-      }
-    ];
 
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.background,
@@ -98,26 +90,33 @@ class HomePage extends StatelessWidget {
                         return const SkeletonComponent();
                       }
                       if (state is TimeSerieLoadedState) {
-                        final TimeSerieViewModel? timeSerie = state.timeSeries.isNotEmpty ?
-                            state.timeSeries[0] : null ;
+                        final TimeSerieViewModel? timeSerie =
+                            state.timeSeries.isNotEmpty
+                                ? state.timeSeries[0]
+                                : null;
+
                         return BlocBuilder<ChangeIndexCubit, ChangeIndexState>(
-                            builder: (context, indexState) {
-                          if (indexState is UpdateIndexState) {
-                            final TimeSerieViewModel timeSerie =
-                                state.timeSeries[indexState.index];
+                          builder: (context, indexState) {
+                            if (indexState is UpdateIndexState) {
+                              final TimeSerieViewModel timeSerie =
+                                  state.timeSeries[indexState.index];
+
+                              return TimeSerieBodyCardComponent(
+                                timeSerie: timeSerie,
+                              );
+                            }
+
+                            if (timeSerie == null) {
+                              return const Center(
+                                child: Text('Algo deu errado'),
+                              );
+                            }
+
                             return TimeSerieBodyCardComponent(
                               timeSerie: timeSerie,
                             );
-                          }
-                          
-                          if(timeSerie == null){
-                            return const Center(child: Text('Algo deu errado'),);
-                          }
-                          
-                          return TimeSerieBodyCardComponent(
-                            timeSerie: timeSerie,
-                          );
-                        });
+                          },
+                        );
                       }
                       if (state is TimeSerieErrorState) {
                         return Center(
@@ -131,51 +130,35 @@ class HomePage extends StatelessWidget {
                 }),
               ),
             ),
-            Row(
-              children: routes
-                  .map(
-                    (route) => Expanded(
-                      child: GestureDetector(
-                        onTap: () {
-                          if (route["route"] == "/favorites") {
-                            Navigator.pushNamed(context, route["route"]);
-                          }
-                        },
-                        child: BaseCardComponent(
-                          margin: const EdgeInsets.symmetric(horizontal: 12),
-                          color: route['route'] == 'home'
-                              ? Theme.of(context).colorScheme.secondary
-                              : Theme.of(context).colorScheme.background,
-                          height: 60,
-                          borderRadius: BorderRadius.circular(8),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Icon(
-                                route["icon"],
-                                size: 24,
-                                color: Theme.of(context).colorScheme.onSurface,
-                              ),
-                              Text(
-                                route["pageNAme"],
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .bodySmall!
-                                    .copyWith(
-                                      fontWeight: FontWeight.bold,
-                                      color: Theme.of(context)
-                                          .colorScheme
-                                          .onSurface,
-                                    ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
+            GestureDetector(
+              onTap: () {
+                Navigator.pushNamed(context, FavoritePage.route);
+              },
+              child: BaseCardComponent(
+                width: MediaQuery.of(context).size.width * 0.24,
+                margin: const EdgeInsets.symmetric(horizontal: 12),
+                color: Theme.of(context).colorScheme.background,
+                height: 80,
+                borderRadius: BorderRadius.circular(8),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Icon(
+                      Icons.favorite,
+                      size: 18,
+                      color: Theme.of(context).colorScheme.onSurface,
                     ),
-                  )
-                  .toList(),
+                    Text(
+                      "Favoritos",
+                      style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                            fontWeight: FontWeight.bold,
+                            color: Theme.of(context).colorScheme.onSurface,
+                          ),
+                    ),
+                  ],
+                ),
+              ),
             ),
           ],
         ),
