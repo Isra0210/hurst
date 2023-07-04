@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hurst/i18n/i18n.dart';
 import 'package:hurst/pages/time_serie_details/components/close_bottom_sheet_component.dart';
 import 'package:hurst/pages/time_serie_details/cubit/oreder_list/sort_list_cubit.dart';
 import 'package:hurst/pages/time_serie_details/cubit/oreder_list/sort_list_state.dart';
@@ -39,7 +40,7 @@ class OrderComponent extends StatelessWidget {
               children: [CloseBottomSheetComponent()],
             ),
             Text(
-              "Ordenar por",
+              R.string.orderBy,
               style: Theme.of(context).textTheme.bodyLarge,
             ),
             Padding(
@@ -48,7 +49,7 @@ class OrderComponent extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   radioComponent(
-                    "Alta",
+                    R.string.high,
                     value: state.sortList?["by"] ?? '',
                     groupValue: "high",
                     onChanged: (_) {
@@ -58,7 +59,7 @@ class OrderComponent extends StatelessWidget {
                     },
                   ),
                   radioComponent(
-                    "Baixa",
+                    R.string.low,
                     value: state.sortList?["by"] ?? '',
                     groupValue: "low",
                     onChanged: (_) {
@@ -71,7 +72,7 @@ class OrderComponent extends StatelessWidget {
               ),
             ),
             Text(
-              "Ordenar como",
+              R.string.orderAs,
               style: Theme.of(context).textTheme.bodyLarge,
             ),
             Padding(

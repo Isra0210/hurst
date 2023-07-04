@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hurst/i18n/i18n.dart';
 import 'package:hurst/pages/time_serie_details/components/close_bottom_sheet_component.dart';
 import 'package:hurst/repository/models/serie_view_model.dart';
 
@@ -52,43 +53,43 @@ class TimeSerieDetailsComponent extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 RichTectComponent(
-                  highlightedLabel: 'Aberto: ',
+                  highlightedLabel: '${R.string.open}: ',
                   label: serie.open,
                 ),
                 RichTectComponent(
-                  highlightedLabel: 'Alta: ',
+                  highlightedLabel: '${R.string.high}: ',
                   label: serie.high,
                 ),
                 RichTectComponent(
-                  highlightedLabel: 'Baixa: ',
+                  highlightedLabel: '${R.string.low}: ',
                   label: serie.low,
                 ),
                 RichTectComponent(
-                  highlightedLabel: 'Fechada: ',
+                  highlightedLabel: '${R.string.closed}: ',
                   label: serie.close,
                 ),
                 RichTectComponent(
-                  highlightedLabel: 'Volume: ',
+                  highlightedLabel: '${R.string.volume}: ',
                   label: serie.volume,
                 ),
                 Visibility(
                   visible: serie.adjustedClose != null,
                   child: RichTectComponent(
-                    highlightedLabel: 'Ajuste fechado: ',
+                    highlightedLabel: '${R.string.adjustedClose}: ',
                     label: serie.adjustedClose ?? '',
                   ),
                 ),
                 Visibility(
                   visible: serie.dividendAmount != null,
                   child: RichTectComponent(
-                    highlightedLabel: 'Valor do dividendo: ',
+                    highlightedLabel: '${R.string.dividendAmount}: ',
                     label: serie.dividendAmount ?? '',
                   ),
                 ),
                 Visibility(
                   visible: serie.dividendAmount != null,
                   child: RichTectComponent(
-                    highlightedLabel: 'Coeficiente de divisão: ',
+                    highlightedLabel: '${R.string.splitCoefficient}: ',
                     label: serie.splitCoefficient ?? '',
                   ),
                 ),

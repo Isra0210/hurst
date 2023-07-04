@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hurst/i18n/i18n.dart';
 import 'package:hurst/pages/components/base_card_component.dart';
 import 'package:hurst/pages/components/rich_text_component.dart';
 import 'package:hurst/pages/time_serie_details/components/order_component.dart';
@@ -87,7 +88,7 @@ class TimeSerieDetailsPage extends StatelessWidget {
         elevation: 0,
         backgroundColor: Theme.of(context).colorScheme.secondary,
         title: Text(
-          "Detalhes",
+          R.string.details,
           style: Theme.of(context).textTheme.bodyLarge,
         ),
       ),
@@ -103,8 +104,11 @@ class TimeSerieDetailsPage extends StatelessWidget {
               }
 
               if (snapshot.data == null || snapshot.hasError) {
-                return const Center(
-                  child: Text('Algo deu errado!'),
+                return Center(
+                  child: Text(
+                    R.string.somethingWentWrong,
+                    style: Theme.of(context).textTheme.bodyLarge,
+                  ),
                 );
               }
 
@@ -113,7 +117,8 @@ class TimeSerieDetailsPage extends StatelessWidget {
                 List<SerieViewModel> series = sortList(
                   series: snapshot.data ?? [],
                   type: sort.sortList?["as"] ?? SortListByEnum.asc.name,
-                  dataToBeSorted:sort.sortList?["by"] ?? DataToBeSortedListEnum.high.name,
+                  dataToBeSorted:
+                      sort.sortList?["by"] ?? DataToBeSortedListEnum.high.name,
                 );
 
                 return SingleChildScrollView(
@@ -144,7 +149,12 @@ class TimeSerieDetailsPage extends StatelessWidget {
                             bottom: 16,
                           ),
                           color: Theme.of(context).colorScheme.background,
-                          child: const Center(child: Text("Ordenar")),
+                          child: Center(
+                            child: Text(
+                              R.string.order,
+                              style: Theme.of(context).textTheme.bodyMedium,
+                            ),
+                          ),
                         ),
                       ),
                       ...series.map(
@@ -209,11 +219,11 @@ class TimeSerieDetailsPage extends StatelessWidget {
                                             MainAxisAlignment.spaceBetween,
                                         children: [
                                           RichTectComponent(
-                                            highlightedLabel: 'Aberto: ',
+                                            highlightedLabel: '${R.string.open}: ',
                                             label: serie.open,
                                           ),
                                           RichTectComponent(
-                                            highlightedLabel: 'Alta: ',
+                                            highlightedLabel: '${R.string.high}: ',
                                             label: serie.high,
                                           ),
                                         ],
@@ -223,11 +233,11 @@ class TimeSerieDetailsPage extends StatelessWidget {
                                             MainAxisAlignment.spaceBetween,
                                         children: [
                                           RichTectComponent(
-                                            highlightedLabel: 'Baixa: ',
+                                            highlightedLabel: '${R.string.low}: ',
                                             label: serie.low,
                                           ),
                                           RichTectComponent(
-                                            highlightedLabel: 'Fechada: ',
+                                            highlightedLabel: '${R.string.closed}: ',
                                             label: serie.close,
                                           ),
                                         ],
