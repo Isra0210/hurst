@@ -14,4 +14,5 @@ class HCColors {
   static Color primaryColorLighter = const Color(0xFF000000);
   static Color bgColorLighter = const Color(0xFFFFFFFF);
   static Color greyLight = const Color(0xFFC5C5D3);
+  static Color greyDark = const Color(0xFF373737);
 }
