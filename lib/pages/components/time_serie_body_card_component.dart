@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hurst/i18n/i18n.dart';
 import 'package:hurst/pages/components/base_card_component.dart';
 import 'package:hurst/pages/components/rich_text_component.dart';
 import 'package:hurst/pages/home/cubit/favorite_time_serie/favorite_time_serie_cubit.dart';
@@ -101,23 +102,23 @@ class TimeSerieBodyCardComponent extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           RichTectComponent(
-                            highlightedLabel: 'Informação: ',
+                            highlightedLabel: '${R.string.information}: ',
                             label: timeSerie.metaData.information,
                           ),
                           RichTectComponent(
-                            highlightedLabel: 'Simbolo: ',
+                            highlightedLabel: '${R.string.symbol}: ',
                             label: timeSerie.metaData.symbol,
                           ),
                           RichTectComponent(
-                            highlightedLabel: 'Ultima atualização: ',
+                            highlightedLabel: '${R.string.lastUpdate}: ',
                             label: timeSerie.metaData.lastRefreshed,
                           ),
                           RichTectComponent(
-                            highlightedLabel: 'Tamanho da saída: ',
+                            highlightedLabel: '${R.string.outputSize}: ',
                             label: timeSerie.metaData.outputSize,
                           ),
                           RichTectComponent(
-                            highlightedLabel: 'Fuso horário: ',
+                            highlightedLabel: '${R.string.timezone}: ',
                             label: timeSerie.metaData.timezone,
                           ),
                         ],
@@ -134,7 +135,7 @@ class TimeSerieBodyCardComponent extends StatelessWidget {
                       color: Theme.of(context).colorScheme.onSurface,
                       borderRadius: BorderRadius.circular(8),
                       child: Text(
-                        'Detalhar',
+                        R.string.detail,
                         style: Theme.of(context).textTheme.bodyLarge!.copyWith(
                             color: Theme.of(context).colorScheme.background),
                         textAlign: TextAlign.center,

@@ -30,19 +30,31 @@ class FavoritePage extends StatelessWidget {
                   padding: const EdgeInsets.all(16.0),
                   child: Column(
                     children: [
-                      ...state.timeSeriesList.map(
-                        (timeSerie) => Padding(
-                          padding: const EdgeInsets.only(bottom: 20.0),
-                          child: TimeSerieBodyCardComponent(timeSerie: timeSerie!,),
-                        )
-                      )
+                      ...state.timeSeriesList.map((timeSerie) => Padding(
+                            padding: const EdgeInsets.only(bottom: 20.0),
+                            child: TimeSerieBodyCardComponent(
+                              timeSerie: timeSerie!,
+                            ),
+                          ))
                     ],
                   ),
                 ),
               ),
             );
           }
-          return const Center(child: Text("Não há favoritos"));
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(top: 60.0, bottom: 60),
+                child: Text(
+                  "Não há favoritos",
+                  style: Theme.of(context).textTheme.bodyLarge,
+                  textAlign: TextAlign.center,
+                ),
+              ),
+            ],
+          );
         },
       ),
     );

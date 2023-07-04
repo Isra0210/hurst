@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -13,6 +15,7 @@ import 'package:hurst/repository/api/time_serie_repository.dart';
 import 'package:hurst/theme/light/app_theme.dart';
 
 import 'firebase_options.dart';
+import 'i18n/resources.dart';
 import 'pages/home/home_page.dart';
 
 void main() async {
@@ -25,8 +28,12 @@ void main() async {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
+  static String platformLocale = Platform.localeName;
+
   @override
   Widget build(BuildContext context) {
+    R.load(Locale(Platform.localeName));
+
     return MultiBlocProvider(
       providers: [
         BlocProvider(

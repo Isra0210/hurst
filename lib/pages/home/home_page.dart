@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hurst/i18n/i18n.dart';
 import 'package:hurst/pages/favorites/favorite_page.dart';
 import 'package:hurst/pages/home/cubit/filter_time_serie_by_index/change_index_cubit.dart';
 import 'package:hurst/pages/home/cubit/filter_time_serie_by_index/change_index_state.dart';
@@ -18,7 +19,10 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final List<String> filterSeries = ["Série intermediária", "Série diária"];
+    final List<String> filterSeries = [
+      R.string.intermediateSeries,
+      R.string.dailySeries
+    ];
 
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.background,
@@ -28,7 +32,7 @@ class HomePage extends StatelessWidget {
         leading: const SizedBox(),
         leadingWidth: 0,
         title: Text(
-          "Séries temporais",
+          R.string.timeSeries,
           style: Theme.of(context).textTheme.bodyLarge,
         ),
         actions: [
@@ -107,8 +111,11 @@ class HomePage extends StatelessWidget {
                             }
 
                             if (timeSerie == null) {
-                              return const Center(
-                                child: Text('Algo deu errado'),
+                              return Center(
+                                child: Text(
+                                  R.string.somethingWentWrong,
+                                  style: Theme.of(context).textTheme.bodyLarge,
+                                ),
                               );
                             }
 
@@ -147,10 +154,10 @@ class HomePage extends StatelessWidget {
                     Icon(
                       Icons.favorite,
                       size: 18,
-                      color: Theme.of(context).colorScheme.onSurface,
+                      color: Theme.of(context).colorScheme.primary,
                     ),
                     Text(
-                      "Favoritos",
+                      R.string.favorites,
                       style: Theme.of(context).textTheme.bodySmall!.copyWith(
                             fontWeight: FontWeight.bold,
                             color: Theme.of(context).colorScheme.onSurface,
