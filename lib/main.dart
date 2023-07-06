@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:hurst/pages/favorites/favorite_page.dart';
 import 'package:hurst/pages/home/cubit/favorite_time_serie/favorite_time_serie_cubit.dart';
 import 'package:hurst/pages/home/cubit/filter_time_serie_by_index/change_index_cubit.dart';
@@ -19,21 +20,33 @@ import 'i18n/resources.dart';
 import 'pages/home/home_page.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
+  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
   runApp(const SplashPage());
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
   static String platformLocale = Platform.localeName;
 
   @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  @override
+  void initState() {
+    FlutterNativeSplash.remove();
+    super.initState();
+    }
+
+  @override
   Widget build(BuildContext context) {
     R.load(Locale(Platform.localeName));
-
+    FlutterNativeSplash.remove();
     return MultiBlocProvider(
       providers: [
         BlocProvider(

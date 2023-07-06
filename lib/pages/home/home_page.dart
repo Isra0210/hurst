@@ -35,9 +35,6 @@ class HomePage extends StatelessWidget {
           R.string.timeSeries,
           style: Theme.of(context).textTheme.bodyLarge,
         ),
-        actions: [
-          IconButton(onPressed: () async {}, icon: const Icon(Icons.refresh))
-        ],
       ),
       body: Padding(
         padding: const EdgeInsets.all(16),
@@ -102,6 +99,15 @@ class HomePage extends StatelessWidget {
                         return BlocBuilder<ChangeIndexCubit, ChangeIndexState>(
                           builder: (context, indexState) {
                             if (indexState is UpdateIndexState) {
+                              if (state.timeSeries.isEmpty) {
+                                return Center(
+                                  child: Text(
+                                    R.string.somethingWentWrong,
+                                    style:
+                                        Theme.of(context).textTheme.bodyLarge,
+                                  ),
+                                );
+                              }
                               final TimeSerieViewModel timeSerie =
                                   state.timeSeries[indexState.index];
 

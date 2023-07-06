@@ -19,6 +19,7 @@ class TimeSerieBodyCardComponent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BaseCardComponent(
+      height: MediaQuery.of(context).size.height * 0.6,
       color: Theme.of(context).colorScheme.background,
       width: MediaQuery.of(context).size.width * 0.88,
       padding: 0,
@@ -87,10 +88,9 @@ class TimeSerieBodyCardComponent extends StatelessWidget {
               ],
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.all(12),
-            child: SizedBox(
-              height: MediaQuery.of(context).size.height * 0.28,
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.all(12),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
