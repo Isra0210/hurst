@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hurst/theme/light/text_theme.dart';
+import 'package:hurst/theme/text_theme.dart';
 
 import 'color_theme.dart';
 

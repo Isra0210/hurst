@@ -2,9 +2,9 @@ import 'package:dio/dio.dart';
 import 'package:hurst/repository/models/time_serie_view_model.dart';
 
 class TimeSerieRepository {
-  final Dio _dio = Dio(BaseOptions(
-    contentType: 'application/json',
-  ));
+  final Dio _dio = Dio(
+    BaseOptions(contentType: 'application/json'),
+  );
 
   Future<TimeSerieViewModel?> getTimeSeries({
     required String functionQuery,
@@ -19,18 +19,10 @@ class TimeSerieRepository {
       final castResponse =
           TimeSerieViewModel.fromJson(response.data, filterQuery);
       return castResponse;
-    } on DioException catch (e) {
-      //TODO call method report error
-      if (e.response != null) {
-        print(e.response?.requestOptions);
-      } else {
-        print(e.requestOptions);
-      }
+    } on DioException catch (_) {
+      rethrow;
     } catch (error) {
-      print(error);
       rethrow;
     }
-
-    return null;
   }
 }
