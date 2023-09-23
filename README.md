@@ -22,5 +22,4 @@
 
 <br/>
 
-`Para não precisar pedir email para liberação de versão no App tester, subi um apk no drive para facilitar.`
 [Instale o apk](https://drive.google.com/file/d/1gqQNFmypjHWhLBu0mOnIE6GsvEx3VPEN/view?usp=sharing)
